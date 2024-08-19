@@ -81,3 +81,8 @@
         driver: bridge
     ````
 
+### 註記：
+本專案為本機練習使用，故設定為 ``standalone``
+筆者嘗試在本機使用 cluster, docker 差點爆掉，請謹慎服用＾＾
+``standalone`` 下，因為 pulsar 這包 image zookeeper bookkeeper 都包在裡面故可以直接使用
+cluster 的使用需要另外做設定
