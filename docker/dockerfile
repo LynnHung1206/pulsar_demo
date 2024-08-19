@@ -1,0 +1,14 @@
+# Use an official OpenJDK 21 runtime as a parent image
+FROM openjdk:21-jdk-slim
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy the jar file into the container at /app
+COPY /myProject-0.0.1-SNAPSHOT.jar /app/myProject-0.0.1-SNAPSHOT.jar
+
+# Expose the port your application runs on (e.g., 8080)
+EXPOSE 8082
+
+# Set the default command to run your jar file
+ENTRYPOINT ["java", "-jar", "myProject-0.0.1-SNAPSHOT.jar"]
