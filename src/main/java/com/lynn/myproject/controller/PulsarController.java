@@ -1,5 +1,6 @@
 package com.lynn.myproject.controller;
 
+import com.lynn.myproject.dto.ProducerSendDto;
 import com.lynn.myproject.util.PulsarProducerUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +25,11 @@ public class PulsarController {
   @RequestMapping(value = "/send/{token}", method = RequestMethod.GET)
   public void sendMessage(@PathVariable("token") String token) {
     Map<String, String> currentTimeStamp = Map.of("currentTimeStamp", String.valueOf(Timestamp.from(Instant.now())), "token", token);
-    pulsarProducerUtil.sendMsg("persistent://study/app1/partitionTopic", token, "bellooooooooo!!", currentTimeStamp);
+    ProducerSendDto sendDto = ProducerSendDto.builder()
+        .topic("persistent://study/app1/partitionTopic")
+        .msg("bellooooooooo!!")
+        .key(token)
+        .propertyMap(currentTimeStamp).build();
+    pulsarProducerUtil.sendMsg(sendDto);
   }
 }
