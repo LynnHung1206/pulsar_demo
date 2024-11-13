@@ -29,7 +29,7 @@ public class PulsarListener {
     client = PulsarClient.builder().serviceUrl(serviceUrl).build();
     consumer = client.newConsumer()
         .topic("persistent://study/app1/partitionTopic")
-        .subscriptionName("sub-4")
+        .subscriptionName("sub-4") // 單台會有default，多台狀況下需要設定才共享消費進度
         .subscriptionType(SubscriptionType.Key_Shared)
         .messageListener((c, msg) -> {
           try {
